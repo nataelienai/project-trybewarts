@@ -15,32 +15,41 @@ loginButton.addEventListener('click', validateCredentials);
 
 // Requisito 14:
 
-const divrate = document.getElementById('divrate');
+const rateField = document.getElementById('rate-field');
 
 function radioopt(i) {
   const radio = document.createElement('input');
+
   radio.id = `rate${[i]}`;
   radio.value = [i];
   radio.name = 'rate';
   radio.type = 'radio';
+  radio.className = 'form-check-input';
 
   return radio;
 }
 
 function labelopt(i) {
   const label = document.createElement('label');
+
   label.innerText = [i];
   label.htmlFor = `rate${[i]}`;
+  label.className = 'form-check-label';
 
   return label;
 }
 
 function satisfactionLevel(radiobtn) {
   for (let i = 1; i <= radiobtn; i += 1) {
+    const radioField = document.createElement('div');
     const radio = radioopt(i);
     const label = labelopt(i);
-    divrate.appendChild(radio);
-    divrate.appendChild(label);
+
+    radioField.className = 'form-check';
+    radioField.appendChild(radio);
+    radioField.appendChild(label);
+
+    rateField.appendChild(radioField);
   }
 }
 
@@ -128,7 +137,7 @@ submitButton.addEventListener('click', (event) => {
     createField('p', `Casa: ${getSelectedValue('#house option')}`),
     createField('p', `Família: ${getRadioValue('input[name="family"]')}`),
     createField('p', `Matérias: ${getSelectedSubjects('.subject')}`),
-    createField('p', `Avaliação: ${getRadioValue('#divrate input')}`),
+    createField('p', `Avaliação: ${getRadioValue('#rate-field input')}`),
     createField('p', `Observações: ${getInputText('textarea')}`),
   ];
   evaluationForm.innerHTML = '';
